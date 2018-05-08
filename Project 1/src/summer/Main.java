@@ -3,6 +3,8 @@ package summer;
 
 import java.util.*;
 import java.io.*;
+import java.net.MalformedURLException;
+
 import javafx.scene.text.Font;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
@@ -23,6 +25,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class Main<S> extends Application {
@@ -114,6 +117,30 @@ public class Main<S> extends Application {
 			list.setPrefWidth(100);
 			list.setPrefHeight(600);
 		
+			
+			
+			list.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+			    @Override
+			    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+			        // Your action here
+			    	FileChooser fileChooser = new FileChooser();
+			    	File selectedFile = fileChooser.showOpenDialog(webView.getScene().getWindow());
+					
+					if (selectedFile != null) 
+					{
+						try 
+						{
+							webEngine.load(selectedFile.toURI().toURL().toExternalForm());
+						}
+						catch(MalformedURLException ex) 
+						{
+							ex.printStackTrace();
+						}
+					}
+			    }
+			});
+			
+			
 		GridPane grid = new GridPane();
 		
 		BorderPane table1 = new BorderPane();
@@ -125,14 +152,14 @@ public class Main<S> extends Application {
 
 		table1.setBottom(table);
 		
-		Navigation nav = new Navigation(webView, "https://cnn.com", false);
+		Navigation nav = new Navigation(webView, "https://google.com", false);
 		
 		
 		//added navigation bar
 		layout.setTop(nav);
 		//added navigation bar 	
 		layout.setLeft(grid);
-		layout.setBottom(table);
+		layout.setBottom(table1);
 		
 		
 		//reading from file
