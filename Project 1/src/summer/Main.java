@@ -130,9 +130,10 @@ public class Main<S> extends Application {
 					{
 						try 
 						{
+							System.out.println("Hello");
 							webEngine.load(selectedFile.toURI().toURL().toExternalForm());
 						}
-						catch(MalformedURLException ex) 
+						catch(MalformedURLException ex)	 
 						{
 							ex.printStackTrace();
 						}
