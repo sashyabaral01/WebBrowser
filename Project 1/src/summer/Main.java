@@ -79,7 +79,7 @@ public class Main<S> extends Application {
 		final WebEngine webEngine = webView.getEngine();
 
 		// LOad the Start-Page
-		webEngine.load("http://www.cnn.com");
+		webEngine.load("http://www.google.com");
 		
 		// Update the stage title when a new web page title is available
 		
