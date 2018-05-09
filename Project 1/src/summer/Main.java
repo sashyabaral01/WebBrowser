@@ -1,6 +1,4 @@
 package summer;
-
-
 import java.util.*;
 import java.io.*;
 import javafx.scene.text.Font;
@@ -21,22 +19,16 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-
 public class Main<S> extends Application {
-
-
 	private TableView<String> table = new TableView<String>();
 	private Scanner z;
 	Label a1;
 	Label b1;
 	Label c1;
 	Label d1;
-
-
 	public static void main(String[]args) {
 		launch(args);
 	}
-
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -45,82 +37,34 @@ public class Main<S> extends Application {
 		button.setText("Click");
 		button.setOnAction(e->System.out.println("Hello"));
 		BorderPane layout = new BorderPane();
-		ListView<String> list = new ListView<String>();
-		
-		final Label label = new Label("Address Book");
-		
+		ListView<String> list = new ListView<String>();		
+		final Label label = new Label("Address Book");		
         label.setFont(new Font("Arial", 20));
-
- 
         table.setEditable(true);
- 
         TableColumn firstNameCol = new TableColumn("First Name");
         TableColumn lastNameCol = new TableColumn("Last Name");
         TableColumn emailCol = new TableColumn("Email");
         emailCol.setMinWidth(200);
+        
         emailCol.setCellValueFactory(
-                new PropertyValueFactory<S,String>("email"));
-        
-        
-        
-        
-        
-        
+        new PropertyValueFactory<S,String>("email"));       
         table.getColumns().addAll(firstNameCol, lastNameCol, emailCol);
-        
        table.setPrefHeight(150);
        table.setPrefWidth(150);
-       
-       
        //adding a browser
-       
-       
-		WebView webView = new WebView();
-		
+		WebView webView = new WebView();	
 		// Create the WebEngine
 		final WebEngine webEngine = webView.getEngine();
-
 		// LOad the Start-Page
 		webEngine.load("http://www.google.com");
-		
 		// Update the stage title when a new web page title is available
-		
-		
 		layout.setCenter(webView);
-
-		// Create the VBox
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
-       
        //adding a browser
-
         ObservableList<String> items =FXCollections.observableArrayList (
 			    "Test", "Car", "Name", "Plane");
 			list.setItems(items);
 			list.setPrefWidth(100);
-			list.setPrefHeight(600);
-		
-			
-			
+			list.setPrefHeight(600);		
 			list.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 			    @SuppressWarnings("unlikely-arg-type")
 				@Override
@@ -131,58 +75,26 @@ public class Main<S> extends Application {
 			        	System.out.println("Hello");
 			        	openFile();
 			        	readFile();
-			        	layout.setCenter(a1);
-			        	
-			        	
-			        	
-			    
-			    }
-			        
-			        
+			        	layout.setCenter(a1); 
+			        }    
 			    }
 			});
-			
-			
-		GridPane grid = new GridPane();
-		
+			GridPane grid = new GridPane();
 		BorderPane table1 = new BorderPane();
-		
-		
 		//grid.add(button, 0, 0);
 		grid.add(list, 0, 0);
-		
-
 		table1.setBottom(table);
-		
 		Navigation nav = new Navigation(webView, "", false);
-		
-		
 		//added navigation bar
 		layout.setTop(nav);
 		//added navigation bar 	
 		layout.setLeft(grid);
-		layout.setBottom(table1);
-		
-		
-		//reading from file
-		
-		
-		
-		
-		
-		
-		
-		//reading from file
-		//layout.getChildren().addAll(grid,table1);		
+		layout.setBottom(table1);		
 		Scene scene = new Scene(layout,300,250);
-		
 		primaryStage.setScene(scene);
 		primaryStage.show();
-		
-		
 	}
 	public void openFile() {
-		
 		try {
 			z= new Scanner(new File("src/summer/Name.txt"));
 		}
@@ -198,24 +110,19 @@ public class Main<S> extends Application {
 				String b = z.next();
 				String c = z.next();
 				String d = z.next();
-				
 				a1 = new Label(a);
 				b1 = new Label(b);
 				c1 = new Label(c);
-				d1 = new Label(d);
-				
+				d1 = new Label(d);				
 				System.out.println(a);
 				System.out.println(b);
 				System.out.println(c);
 				System.out.println(d);
-				System.out.println("Successful");
-				
+				System.out.println("Successful");				
 			}
 		}
 		catch(Exception e) {
 			System.out.println("Failed to find");
-			
 		}
 	}
-
 }
