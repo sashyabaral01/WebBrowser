@@ -10,6 +10,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
+import javafx.scene.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -65,17 +66,17 @@ public class Main<S> extends Application {
 		// Update the stage title when a new web page title is available
 		layout.setCenter(webView);
        //adding a browser
-        ObservableList<String> items =FXCollections.observableArrayList (
-			    "Test ", file1, "Name", "Plane","Default");
-			list.setItems(items);
-			list.setPrefWidth(100);
+        ObservableList<? extends Object> items =FXCollections.observableArrayList (
+			    file1 , file2, file3, file4,"Default");
+			list.setItems((ObservableList<String>) items);
+			list.setPrefWidth(300);
 			list.setPrefHeight(600);		
 			list.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 			    @SuppressWarnings("unlikely-arg-type")
 				@Override
 			    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 			        
-			        if(list.equals("Test"));
+			        if(list.equals(file1));
 			        {
 			        	System.out.println("Hello");
 			        	openFile();
@@ -146,14 +147,23 @@ public class Main<S> extends Application {
 		}
 	}
 	public void displayContents() {
-		 File file = new File("C:\\Users\\Sshy\\Desktop\\Text Files");  
-		 File[] files = file.listFiles();  
-		 for (File f:files)  
-		 {  
-		     System.out.println(f.getAbsolutePath()); 
-		   file1= f.getAbsolutePath();
-		   System.out.println(file1);
-		     
-		 }  
+		   File path = new File("C:\\Users\\Sshy\\Desktop\\Text Files");
+
+		    File [] files = path.listFiles();
+		    for (int i = 0; i < files.length; i++){
+		        if (files[i].isFile()){ //this line weeds out other directories/folders
+		        String	stringFiles = files[i].toString();
+		            System.out.println(stringFiles);
+		             file1 = files[i].toString();
+		             i++;
+		             file2=files[i].toString();
+		             i++;
+		             file3=files[i].toString();
+		             i++;
+		             file4=files[i].toString();
+		             
+		             //file4= files[i+3].toString();
+		        }
+		    }
 	}
 }
