@@ -26,6 +26,11 @@ public class Main<S> extends Application {
 	Label b1;
 	Label c1;
 	Label d1;
+	String file1;
+	String file2;
+	String file3;
+	String file4;
+	GridPane labels = new GridPane();
 	public static void main(String[]args) {
 		launch(args);
 	}
@@ -44,13 +49,13 @@ public class Main<S> extends Application {
         TableColumn firstNameCol = new TableColumn("First Name");
         TableColumn lastNameCol = new TableColumn("Last Name");
         TableColumn emailCol = new TableColumn("Email");
-        emailCol.setMinWidth(200);
-        
+        emailCol.setMinWidth(200);       
         emailCol.setCellValueFactory(
         new PropertyValueFactory<S,String>("email"));       
         table.getColumns().addAll(firstNameCol, lastNameCol, emailCol);
        table.setPrefHeight(150);
        table.setPrefWidth(150);
+       displayContents();
        //adding a browser
 		WebView webView = new WebView();	
 		// Create the WebEngine
@@ -61,7 +66,7 @@ public class Main<S> extends Application {
 		layout.setCenter(webView);
        //adding a browser
         ObservableList<String> items =FXCollections.observableArrayList (
-			    "Test", "Car", "Name", "Plane");
+			    "Test ", file1, "Name", "Plane","Default");
 			list.setItems(items);
 			list.setPrefWidth(100);
 			list.setPrefHeight(600);		
@@ -75,19 +80,34 @@ public class Main<S> extends Application {
 			        	System.out.println("Hello");
 			        	openFile();
 			        	readFile();
-			        	layout.setCenter(a1); 
-			        }    
+			        	labels.add(a1, 0, 1);
+			        	
+			        	GridPane labels2 = new GridPane();
+			        	labels2.add(b1, 0, 2);
+			        	
+			        	Button b = new Button();
+			        	
+			        	layout.setCenter(labels); 
+			        	layout.setRight(labels2);
+			        
+			        } 
+			         if(list.equals("Default")) {
+			        	 WebView webView = new WebView();	
+			     		// Create the WebEngine
+			     		final WebEngine webEngine = webView.getEngine();
+			     		// LOad the Start-Page
+			     		webEngine.load("http://www.google.com");
+			     		// Update the stage title when a new web page title is available
+			     		layout.setCenter(webView);
+			        }
 			    }
 			});
 			GridPane grid = new GridPane();
 		BorderPane table1 = new BorderPane();
-		//grid.add(button, 0, 0);
 		grid.add(list, 0, 0);
 		table1.setBottom(table);
 		Navigation nav = new Navigation(webView, "", false);
-		//added navigation bar
 		layout.setTop(nav);
-		//added navigation bar 	
 		layout.setLeft(grid);
 		layout.setBottom(table1);		
 		Scene scene = new Scene(layout,300,250);
@@ -124,5 +144,16 @@ public class Main<S> extends Application {
 		catch(Exception e) {
 			System.out.println("Failed to find");
 		}
+	}
+	public void displayContents() {
+		 File file = new File("C:\\Users\\Sshy\\Desktop\\Text Files");  
+		 File[] files = file.listFiles();  
+		 for (File f:files)  
+		 {  
+		     System.out.println(f.getAbsolutePath()); 
+		   file1= f.getAbsolutePath();
+		   System.out.println(file1);
+		     
+		 }  
 	}
 }
