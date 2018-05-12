@@ -20,7 +20,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-public class Main<S> extends Application {
+public class Main1<S> extends Application {
 	private TableView<String> table = new TableView<String>();
 	private Scanner z;
     String everything;
@@ -91,7 +91,7 @@ public class Main<S> extends Application {
 							// TODO Auto-generated catch block
 							System.out.println("Failed");
 						}
-			        
+			        	Button b = new Button();
 			        } 
 			        
 			    
