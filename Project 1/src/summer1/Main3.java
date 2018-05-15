@@ -24,7 +24,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-public class Main1<S> extends Application {
+public class Main3<S> extends Application {
 	
 	
 	private Scanner z;
@@ -36,17 +36,10 @@ public class Main1<S> extends Application {
 	Label c1;
 	Label d1;
 	String file1;
-	String start;
-	String id;
-	String end;
-	String agreement;
 	String label;
 	String type;
+	String identification;
 	BorderPane layout = new BorderPane();
-	
-	
-		Annotation person = new Annotation(type,label,id,start,end,agreement);
-
 	//String file2;
 	//String file3;
 	//String file4;
@@ -58,61 +51,30 @@ public class Main1<S> extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		primaryStage.setTitle("!Browser!");
-		Button button = new Button();
-		button.setText("Click");
-		button.setOnAction(e->System.out.println("Hello"));
-		
-		
 
-		
-		
-		
-		
-		
 		ListView<String> list = new ListView<String>();		
-		
-       
-       
-      
-       //table view
-		
-		
-		
-		
 
+		
 		TableColumn nameColumn = new TableColumn("Type");
 		nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 
 		TableColumn surnameColumn = new TableColumn("Tag");
 		surnameColumn.setCellValueFactory(new PropertyValueFactory<>("surname"));
-
-		tab.getColumns().addAll(nameColumn, surnameColumn);
 		
-		Person2 person = new Person2("John", "Doe", everything);
+		
+		
+		TableColumn middlenameColumn = new TableColumn("Identification");
+		middlenameColumn.setCellValueFactory(new PropertyValueFactory<>("middlename"));
+
+		tab.getColumns().addAll(nameColumn, surnameColumn,middlenameColumn);
+		
+		Person2 person = new Person2("John", "Doe","101");
 		tab.getItems().add(person);
 		
 		
+		
+		
 		layout.setBottom(tab);
-		
-		
-		
-		
-		//table view
-       
-     //annotations and JSONArrayStuff
-		
-       
-       
-       
-       
-       
-       
-       //annotations and JSONArrayStuff
-       
-       
-     
-       //displayContents();
-       //adding a browser
 		WebView webView = new WebView();	
 		// Create the WebEngine
 		final WebEngine webEngine = webView.getEngine();
@@ -170,17 +132,13 @@ public class Main1<S> extends Application {
 			     	    	   
 			     	    	   System.out.println(annotation.get("id"));
 			     	    	   
-			     	    	   id = (String)annotation.get("id").toString();
+			     	    	   identification = (String) annotation.get("id").toString();
 			     	    	   
 			     	    	   
 			     	    	   System.out.println(annotation.get("start")); 
-			     	    	   
-			     	    	   start = (String)annotation.get("start").toString();
 			     	    	   System.out.println(annotation.get("end"));
 			     	    	   
-			     	    		   end = (String)annotation.get("end").toString();
-			     	    		
-			     	    		
+			     	    	   
 			     	    	   System.out.println(annotation.get("@type"));
 			     	    	   
 			     	    	    type = (String) annotation.get("@type");
@@ -190,42 +148,31 @@ public class Main1<S> extends Application {
 			     	    	    
 			     	    	    
 
-					     	      	     	    	   			     	    	   			     	    	  			     	    	   
+					     	      TableColumn type1 = new TableColumn("type");
+					     			type1.setCellValueFactory(new PropertyValueFactory<>("type"));
+
+					     			TableColumn label1 = new TableColumn("Tag");
+					     			
+					     			label1.setCellValueFactory(new PropertyValueFactory<>("label"));
+					     			
+					     			
+					     			TableColumn id= new TableColumn("Id");
+					     			id.setCellValueFactory(new PropertyValueFactory<>("ID"));
+
+					     			//tab.getColumns().addAll(type1, label1);					     								     								     								     			
+					     			     	    	   			     	    	  			     	    	   
 			     	    	   JSONObject feature = (JSONObject)annotation.get("features");
 			     	    	   System.out.println(feature.get("agreement"));
+			     	    	   
 			     	    	   System.out.println(feature.get("annotator"));
 			     	    	   System.out.println(feature.get("content"));
-			     	    	   
-			     	    	   agreement = (String)feature.get("agreement");
-			     	    	   
-			     	    	  TableColumn typeColumn = new TableColumn("type");
-				     			typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
-
-				     			TableColumn label1 = new TableColumn("Label");
-				     			
-				     			label1.setCellValueFactory(new PropertyValueFactory<>("label"));
-				     			
-				     			
-				     			TableColumn identificationColumn = new TableColumn("id");
-				     			
-				     			identificationColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-				     			
-				     			
-				     			TableColumn startColumn = new TableColumn("start");
-				     			startColumn.setCellValueFactory(new PropertyValueFactory<>("start"));
-				     			
-				     			
-				     			TableColumn endColumn = new TableColumn("end");
-				     			endColumn.setCellValueFactory(new PropertyValueFactory<>("end"));
-				     			
-				     			
-				     			TableColumn agreementColumn = new TableColumn("Agreement");
-				     			agreementColumn.setCellValueFactory(new PropertyValueFactory<>("Agreement"));
-				  
-				     			tab.getColumns().addAll(typeColumn, label1,	identificationColumn,startColumn,endColumn,agreementColumn);					     								     								     								     			
-				     			Annotation person = new Annotation(type,label,id,start,end,agreement);
-				     			tab.getItems().add(person);		
 			     	   		
+			     	    	   
+			     	    	  Person2 person = new Person2(type,label,identification);
+			     	    	  
+			     	    	  
+			     	    	 tab.getItems().add(person);		
+			     	    	   layout.setBottom(tab);
 			     	    	 
 				     			
 			     	       }
@@ -314,14 +261,7 @@ public class Main1<S> extends Application {
        
        WebView webView = new WebView();	
 		WebView webView1 = new WebView();
-		
 
-		// Create the WebEngine
-		
-		
-	
-
-		
 		
 		final WebEngine webEngine = webView.getEngine();
 		
@@ -350,10 +290,6 @@ public class Main1<S> extends Application {
        }
        
        String annotations21;
-       
-       
-     
-       
-       
+
 	}
 }
